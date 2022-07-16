@@ -1,4 +1,9 @@
 ﻿Cases c = new Cases();
-c.RandomizeCases();
+Player p = new Player();
 
-// c.DisplayCases();
+c.RandomizeCases();
+Console.WriteLine(c.gameValues[8]);
+c.DisplayCases();
+c.choosePCase();
+p.HandleRounds();
+
