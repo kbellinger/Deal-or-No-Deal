@@ -5,6 +5,7 @@ public class Cases
     public int totalChosenAmt = 0;
     public int playerCase;
     public int round = 1;
+    public bool offerGiven = false;
 
 
     public List<int> amounts = new List<int>()
@@ -42,7 +43,34 @@ public class Cases
         " 1 "," 2 "," 3 "," 4 "," 5 "," 6 "," 7 "," 8 "," 9 "," 10"," 11"," 12"," 13"," 14"," 15"," 16"," 17"," 18"," 19"," 20"," 21"," 22"," 23"," 24"," 25"," 26"
     };
 
-    public List<int> gameValues = new List<int>();
+    public List<int> gameValues = new List<int>(){
+        300000,
+        500,
+        2,
+        750,
+        1000,
+        300,
+        200,
+        25,
+        100000,
+        400,
+        75,
+        5,
+        50000,
+        10000,
+        5000,
+        1,
+        10,
+        750000,
+        75000,
+        400000,
+        1000000,
+        500000,
+        50,
+        25000,
+        200000,
+        100
+    };
 
     public Cases()
     {
@@ -57,6 +85,7 @@ public class Cases
 //with the new index to creat our hidden case values
     public void RandomizeCases()
     {
+
         Random rand = new Random();
         int index;
         while( gameValues.Count < 26){
@@ -74,27 +103,34 @@ public class Cases
     // }
 
     //gives prompt to choose players case and then store it and edit the list.
-    public void choosePCase(){
+    public int choosePCase(){
 
-        string filler;
+        // string filler;
         Console.WriteLine("\nYou will now get to select your case.\nThis will be your case until the end of the game.");
         Console.Write("\nPick your case: ");
+        this.playerCase = playerCase;
         playerCase = int.Parse(Console.ReadLine());
-        if (playerCase < 9){
-            filler = "***";
-        } else {
-            filler = "**";
-        }
-        caseNums[playerCase - 1] = filler;
+        // if (playerCase < 9){
+        //     filler = "***";
+        // } else {
+        //     filler = "**";
+        // }
+        caseNums[playerCase - 1] = "***";       
+        caseNums = caseNums;
+
         Console.WriteLine($"You chose case number {playerCase}");
         // Console.WriteLine($" -----\n|  {playerCase}  |\n -----");
         Thread.Sleep(2000);
         DisplayCases();
+
+        return playerCase;
     }
 
     //takes value of chosen case values and adds them to the totalChosen amount and returns the value.
-    public int chosenCasesValue(){
-        return 0;
+    public int chosenCasesValue(int totalChosenValue){
+        totalChosenValue = this.totalChosenAmt;
+        totalChosenValue += totalChosenValue;
+        return totalChosenValue;
     }
 
     public void DisplayCases()
@@ -108,7 +144,7 @@ public class Cases
         Console.WriteLine($"     -----      -----      ------      ------      ------      ------             {amounts[5]}        {amounts[18]}");
         Console.WriteLine($"                                                                                  {amounts[6]}        {amounts[19]}");
         Console.WriteLine($" ------     ------     ------     ------     ------     ------     ------         {amounts[7]}       {amounts[20]}");
-        Console.WriteLine($"| {caseNums[13]}  |   | {caseNums[14]}  |   | {caseNums[15]}  |   | {caseNums[16]}  |   | {caseNums[17]}  |   | {caseNums[18]}  |   |  {caseNums[19]}  |        {amounts[8]}       {amounts[21]}");
+        Console.WriteLine($"| {caseNums[13]}  |   | {caseNums[14]}  |   | {caseNums[15]}  |   | {caseNums[16]}  |   | {caseNums[17]}  |   | {caseNums[18]}  |   | {caseNums[19]}  |        {amounts[8]}       {amounts[21]}");
         Console.WriteLine($" ------     ------     ------     ------     ------     ------     ------         {amounts[9]}       {amounts[22]}");
         Console.WriteLine($"                                                                                  {amounts[10]}       {amounts[23]}");
         Console.WriteLine($"     ------     ------     ------      ------      ------      ------             {amounts[11]}       {amounts[24]}");
@@ -117,30 +153,45 @@ public class Cases
     }
 
     //Displays what amount is inside the case and removes amount and case from their lists.
-    public void OpenCase(int caseNumber)
+    public int OpenCase(int caseNumber)
     {
+        // gameValues = this.gameValues;
         int caseNumberIndex = caseNumber - 1;
+        int value = gameValues[caseNumberIndex];
 
         Console.WriteLine($"Opening case number {caseNumber} in...");
-        Thread.Sleep(1000);
+        Thread.Sleep(500);
         Console.WriteLine("3");
-        Thread.Sleep(1000);
+        Thread.Sleep(500);
         Console.WriteLine("2");
-        Thread.Sleep(1000);
+        Thread.Sleep(500);
         Console.WriteLine("1");
-        Thread.Sleep(1000);
-        Console.WriteLine($"\nCase number {caseNumber} has..");
-        gameValues.ForEach(Console.WriteLine);
+        Thread.Sleep(500);
+        Console.WriteLine($"\nCase number {caseNumber} has {gameValues[caseNumberIndex]}");
+        Thread.Sleep(2000);
+
+        // Console.WriteLine($"List in open cases function{gameValues.Count}");
 
         //removing the value from the list and blanking out the case. then displaying new board to repeat.
-        // gameValues.RemoveAt(caseNumber);
-        // caseNums[caseNumber] = "   ";
-        // DisplayCases();
+        caseNums[caseNumberIndex] = "   ";
 
+        caseNums = caseNums;
+
+        int newIndex =amounts.FindIndex(n => n == value);
+        if (newIndex != -1){
+            amounts[newIndex] = 0;
+        }
+        amounts = amounts;
+
+        DisplayCases();
+        
+        return value;
+        
     }
 
 
 }
-
+//for total chosen amount, take index of gamevalue that is equal with 
+//chosen case and set it equal to variable named value and send to ChosenCaseValue function.
 //when player picks case number, pass through if statement and match with list. 
 //what was selected subtract one and have that be the index then set that case number to nothing
