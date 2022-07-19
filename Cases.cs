@@ -44,32 +44,32 @@ public class Cases
     };
 
     public List<int> gameValues = new List<int>(){
-        300000,
-        500,
-        2,
-        750,
-        1000,
-        300,
-        200,
-        25,
-        100000,
-        400,
-        75,
-        5,
-        50000,
-        10000,
-        5000,
-        1,
-        10,
-        750000,
-        75000,
-        400000,
-        1000000,
-        500000,
-        50,
-        25000,
-        200000,
-        100
+        // 300000,
+        // 500,
+        // 2,
+        // 750,
+        // 1000,
+        // 300,
+        // 200,
+        // 25,
+        // 100000,
+        // 400,
+        // 75,
+        // 5,
+        // 50000,
+        // 10000,
+        // 5000,
+        // 1,
+        // 10,
+        // 750000,
+        // 75000,
+        // 400000,
+        // 1000000,
+        // 500000,
+        // 50,
+        // 25000,
+        // 200000,
+        // 100
     };
 
     public Cases()
@@ -97,13 +97,12 @@ public class Cases
                 }
             }
         }
-        gameValues.ForEach(Console.WriteLine);
-        }
+        // gameValues.ForEach(Console.WriteLine);
+    }
 
-    // }
 
     //gives prompt to choose players case and then store it and edit the list.
-    public int choosePCase(){
+    public void choosePCase(){
 
         // string filler;
         Console.WriteLine("\nYou will now get to select your case.\nThis will be your case until the end of the game.");
@@ -115,15 +114,14 @@ public class Cases
         // } else {
         //     filler = "**";
         // }
+        caseNums = this.caseNums;
         caseNums[playerCase - 1] = "***";       
-        caseNums = caseNums;
+        // caseNums = caseNums;
 
         Console.WriteLine($"You chose case number {playerCase}");
-        // Console.WriteLine($" -----\n|  {playerCase}  |\n -----");
         Thread.Sleep(2000);
         DisplayCases();
 
-        return playerCase;
     }
 
     //takes value of chosen case values and adds them to the totalChosen amount and returns the value.
@@ -153,11 +151,11 @@ public class Cases
     }
 
     //Displays what amount is inside the case and removes amount and case from their lists.
-    public int OpenCase(int caseNumber)
+    public int OpenCase(int caseNumber, List<int> gameValuesList)
     {
-        // gameValues = this.gameValues;
+
         int caseNumberIndex = caseNumber - 1;
-        int value = gameValues[caseNumberIndex];
+        int value = gameValuesList[caseNumberIndex];
 
         Console.WriteLine($"Opening case number {caseNumber} in...");
         Thread.Sleep(500);
@@ -167,17 +165,16 @@ public class Cases
         Thread.Sleep(500);
         Console.WriteLine("1");
         Thread.Sleep(500);
-        Console.WriteLine($"\nCase number {caseNumber} has {gameValues[caseNumberIndex]}");
+        Console.WriteLine($"\nCase number {caseNumber} has {gameValuesList[caseNumberIndex]}");
         Thread.Sleep(2000);
 
-        // Console.WriteLine($"List in open cases function{gameValues.Count}");
 
         //removing the value from the list and blanking out the case. then displaying new board to repeat.
         caseNums[caseNumberIndex] = "   ";
 
-        caseNums = caseNums;
 
-        int newIndex =amounts.FindIndex(n => n == value);
+        //replaces the amount with 0 so they don't show on game board any more
+        int newIndex = amounts.FindIndex(n => n == value);
         if (newIndex != -1){
             amounts[newIndex] = 0;
         }

@@ -1,18 +1,19 @@
 // gives offer every turn
 public class Banker : Cases
 {
-
+    public Cases c = new Cases();
     //constructor
-    public Banker(){
+    public Banker(List<int> gameValues ){
 
     }
+
 
     // first turn eliminates 6 cases. second turn eliminates 5, 
     //and so on until turn 6 then it is only 1 case elimination til the end of round 9.
     // total is 3418418 . subtract by selected amounts and it will be new total amounts
     //then divide by remaining cases then mutliply by percentage 
     //amount which will start at 0.6 and increment by 0.1
-    public void GiveOffer(int round, int totalChosenAmt){
+    public void GiveOffer(int round, int totalChosenAmt, int pCase, List<int> gameValues){
         // Player p = new Player();
 
         int totalGameAmt = 3418418;
@@ -24,7 +25,7 @@ public class Banker : Cases
             double offer = Math.Round(formula, 0);
             Console.WriteLine("The bank is calling you with an offer...");
             Console.WriteLine($"The Bank offers you ${offer}");
-            DealOrNo(offer);
+            DealOrNo(offer, pCase, gameValues);
 
             // offerGiven = true;
         }
@@ -34,7 +35,7 @@ public class Banker : Cases
             double offer = Math.Round(formula, 0);
             Console.WriteLine("The bank is calling you with an offer...");
             Console.WriteLine($"The Bank offers you ${offer}");
-            DealOrNo(offer);        
+            DealOrNo(offer, pCase, gameValues);        
         }
         else if (round == 4){
             // 4 cases have been opened
@@ -42,7 +43,7 @@ public class Banker : Cases
             double offer = Math.Round(formula, 0);
             Console.WriteLine("The bank is calling you with an offer...");
             Console.WriteLine($"The Bank offers you ${offer}");
-            DealOrNo(offer);
+            DealOrNo(offer, pCase, gameValues);
         }
         else if (round == 5){
             // 3 cases have been opened
@@ -50,7 +51,7 @@ public class Banker : Cases
             double offer = Math.Round(formula, 0);
             Console.WriteLine("The bank is calling you with an offer...");
             Console.WriteLine($"The Bank offers you ${offer}");
-            DealOrNo(offer);
+            DealOrNo(offer, pCase, gameValues);
         }
         else if (round == 6){
             // 2 cases have been opened
@@ -58,7 +59,7 @@ public class Banker : Cases
             double offer = Math.Round(formula, 0);
             Console.WriteLine("The bank is calling you with an offer...");
             Console.WriteLine($"The Bank offers you ${offer}");
-            DealOrNo(offer);
+            DealOrNo(offer, pCase, gameValues);
         }
         else if (round == 7){
             // 1 case has been opened
@@ -66,7 +67,7 @@ public class Banker : Cases
             double offer = Math.Round(formula, 0);
             Console.WriteLine("The bank is calling you with an offer...");
             Console.WriteLine($"The Bank offers you ${offer}");
-            DealOrNo(offer);
+            DealOrNo(offer, pCase, gameValues);
         }
         else if (round == 8){
             // 1 case has been opened
@@ -74,7 +75,7 @@ public class Banker : Cases
             double offer = Math.Round(formula, 0);
             Console.WriteLine("The bank is calling you with an offer...");
             Console.WriteLine($"The Bank offers you ${offer}");
-            DealOrNo(offer);
+            DealOrNo(offer, pCase, gameValues);
         }
         else if (round == 9){
             // 1 case has been opened
@@ -82,31 +83,25 @@ public class Banker : Cases
             double offer = Math.Round(formula, 0);
             Console.WriteLine("The bank is calling you with an offer...");
             Console.WriteLine($"The Bank offers you ${offer}");
-            DealOrNo(offer);
+            DealOrNo(offer, pCase, gameValues);
         }
-        // else if(round == 10){
-        //     // there is just the players chosen case and on hidden case left. 
-        //     //Player now gets to choose to either keep chosen case or switch to other case.
-            
-        // }
 
             
     }
 
-    public void DealOrNo(double bankOffer){
+    public void DealOrNo(double bankOffer, int playerCase, List<int> gameValues){
+        // int playerCase = playerCase;
         Console.WriteLine("Deal (D)     No Deal (N)");
         Console.Write("Enter: ");
         string dealChoice = Console.ReadLine();
-        int playerCase = this.playerCase;
+
         if (dealChoice == "d" || dealChoice == "D"){
             Console.WriteLine($"\nCongratulations you won ${bankOffer}!");
             Console.WriteLine($"Your case had ${gameValues[playerCase]} in it");
-
             Console.WriteLine("Thanks for Playing!");
-
             Thread.Sleep(3000);
             Environment.Exit(0);
-            // Console.WriteLine($"Your case had ${pCase} in it");
+
         } else {
             
             Console.WriteLine($"\n NO DEAL");
